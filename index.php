@@ -8,4 +8,6 @@
 <br>
 <a href="index1.php">Tabela z hostami</a>
 <br>
+<a href="update.php">Tabela z hostami AJAX</a>
+<br>
 </body>
