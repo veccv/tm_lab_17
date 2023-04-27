@@ -1,3 +1,6 @@
+<head>
+    <meta http-equiv=“refresh” content=“10” />
+</head>
 <body>
 <?php
 include 'Database.php';
