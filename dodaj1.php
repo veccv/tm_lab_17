@@ -39,21 +39,9 @@ $session = $_SESSION['loggedin'];
             display: inline-block;
         }
     </style>
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-    <script>
-        function updateTable() {
-            $.ajax({
-                url: 'update.php',
-                success: function(data) {
-                    $('#table-container').html(data);
-                }
-            });
-        }
-        $(document).ready(function() {
-            setInterval(updateTable, 10000); // odświeżanie co 10 sekund
-        });
-    </script>
 </head>
+
+
 
 <body onload="myLoadHeader()" style="background-color: rgba(138,142,160,0.32);">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -106,60 +94,23 @@ $session = $_SESSION['loggedin'];
 <main>
     <section class="sekcja1">
         <div class="container-fluid p-4">
-            <div id="table-container">
-                <?php
-                include 'Database.php';
-                include 'test_ping.php';
-                session_start();
-                print "<TABLE CELLPADDING=5 BORDER=1>";
-                print "<TR><TD>id</TD><TD>Host</TD><TD>Port</TD><TD>Stan</TD></TR>\n";
-                $user_id = $_SESSION['user_id'];
-                if ($_SESSION["login"] == "admin") {
-                    foreach (mysqli_fetch_all(Database::getConnection()->query("SELECT * FROM domeny")) as $wiersz) {
-                        $id = $wiersz[0];
-                        $host = $wiersz[1];
-                        $port = $wiersz[2];
-                        $stan = ping($host, 80, 1);
-                        if (strlen((string)$stan) > 0) {
-                            $stan = "Online";
-                        } else {
-                            $stan = "Offline";
-                        }
-
-                        print "<TR><TD>$id</TD><TD>$host</TD><TD>$port</TD><TD>$stan</TD></TR>\n";
-                    }
-                } else {
-                    foreach (mysqli_fetch_all(Database::getConnection()->query("SELECT * FROM domeny WHERE user_id=$user_id")) as $wiersz) {
-                        $id = $wiersz[0];
-                        $host = $wiersz[1];
-                        $port = $wiersz[2];
-                        $stan = ping($host, 80, 1);
-                        if (strlen((string)$stan) > 0) {
-                            $stan = "Online";
-                        } else {
-                            $stan = "Offline";
-                        }
-
-                        print "<TR><TD>$id</TD><TD>$host</TD><TD>$port</TD><TD>$stan</TD></TR>\n";
-                    }
-                }
-                foreach (mysqli_fetch_all(Database::getConnection()->query("SELECT * FROM domeny WHERE user_id=$user_id")) as $wiersz) {
-                    $id = $wiersz[0];
-                    $host = $wiersz[1];
-                    $port = $wiersz[2];
-                    $stan = ping($host, 80, 1);
-                    if (strlen((string)$stan) > 0) {
-                        $stan = "Online";
-                    } else {
-                        $stan = "Offline";
-                    }
-
-                    print "<TR><TD>$id</TD><TD>$host</TD><TD>$port</TD><TD>$stan</TD></TR>\n";
-                }
-                print "</TABLE>";
-                Database::getConnection()->close();
-                ?>
-            </div>
+            <form method="POST" action="dodaj2.php">
+                <label for="host" class="form-label">Host</label>
+                <input type="text" class="form-control" name="host" id="host"
+                       placeholder="host"
+                       value=""
+                       required>
+                <br>
+                <label for="port" class="form-label">Port</label>
+                <input type="text" class="form-control" name="port" id="port"
+                       placeholder="port"
+                       value=""
+                       required>
+                <br>
+                <br>
+                <button  type="submit">Dodaj nowy host
+                </button>
+            </form>
         </div>
     </section>
 </main>
