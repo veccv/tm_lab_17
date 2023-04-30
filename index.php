@@ -10,6 +10,6 @@
 <br>
 <a href="update.php">Tabela z hostami AJAX</a>
 <br>
-<a href="update.php">Tabela z hostami AJAX</a>
+<a href="dodaj1.php">Formularz dodawania hosta</a>
 <br>
 </body>
