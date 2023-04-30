@@ -21,6 +21,7 @@ if (!$rekord)
         session_start();
         $_SESSION['loggedin'] = true;
         $_SESSION['login'] = $email;
+        $_SESSION['user_id'] = $rekord['id'];
 
         header('Location: index.php');
     } else {

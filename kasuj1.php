@@ -5,7 +5,9 @@
 <form method="POST" action="kasuj2.php">
     <?php
     include 'Database.php';
-    $listOfHosts = mysqli_fetch_all(Database::getConnection()->query("SELECT * FROM domeny"));
+    session_start();
+    $user_id = $_SESSION['user_id'];
+    $listOfHosts = mysqli_fetch_all(Database::getConnection()->query("SELECT * FROM domeny WHERE user_id=$user_id"));
     echo '<label for="host">Wybierz host do usunięcia</label>';
     echo '<br>';
     echo '<select name="host" id="host">';
