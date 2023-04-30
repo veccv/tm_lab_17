@@ -12,4 +12,6 @@
 <br>
 <a href="dodaj1.php">Formularz dodawania hosta</a>
 <br>
+<a href="kasuj1.php">Formularz usuwania hosta</a>
+<br>
 </body>
